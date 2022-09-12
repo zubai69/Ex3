@@ -13,7 +13,12 @@ void zaem() {
 	std::cout << "Введите количество лет:" << std::endl;
 	std::cin >> n;
 	double r = p / 100;
-	m = (S * r * pow((1 + r), n)) / (12 * (pow((1 + r), n) - 1));
+	if (r == 0) {
+		m = S / (12 * n);
+	}
+	else {
+		m = (S * r * pow((1 + r), n)) / (12 * (pow((1 + r), n) - 1));
+	}
 	std::cout << "Месячная выплата равна: " << m << std::endl;
 }
 
