@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <vector>
 
 void zaem() {
 	double m, S, n, p;
@@ -85,14 +86,33 @@ void filt() {
 
 void sortirovka() {
 	std::string str;
+	int len;
 	std::cout << "Введите символы: ";
 	std::cin >> str;
-	sort(str.begin(), str.end());
-	std::cout << str << std::endl;
+	len = str.length();
+	std::vector <char> mass;
+	mass.reserve(str.length());
+	for (char s : str) {
+		mass.push_back(s);
+	}
+	for (int i = 0; i < mass.size()-1; i++) {
+		for (int ii = 0; ii < mass.size()-1; ii++) {
+			if (mass[ii] > mass[ii + 1]) {
+				char a = mass[ii];
+				mass[ii] = mass[ii + 1];
+				mass[ii + 1] = a;
+			}
+		}
+	}
+	for (char i : mass) {
+		std::cout << i;
+	}
+	std::cout << std::endl;
 }
 
 int main()
 {
 	setlocale(LC_ALL, "");
+	sortirovka();
 	return 0;
 }
