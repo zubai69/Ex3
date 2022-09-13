@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <experimental/filesystem>
 
 void zaem() {
 	double m, S, n, p;
@@ -56,32 +57,31 @@ void ssuda()
 
 void copyfile() {
 	std::ofstream f1;
-	std::ifstream f2;
-	f1.open("zubai.txt");
-	f2.open("zubai.txt");
-	std::cout << "Значения для файла:";
-	std::string str, S;
-	std::cin >> str;
-	f1 << str;
+	std::string filename = "zubai.txt";
+	f1.open(filename);
+	std::string full_path = std::experimental::filesystem::canonical(filename).generic_string();
+	std::cout << full_path << std::endl;
 	f1.close();
-	std::getline(f2, S);
-	std::cout << S << std::endl;
-	f2.close();
 }
 
 void filt() {
-	std::ifstream f;
+	std::ofstream f;
 	f.open("zubai.txt");
-	if (!f) copyfile();
+	std::cout << "Введите строку: " << std::endl;
+	std::string strr;
+	f << strr;
 	f.close();
-	f.open("zubai.txt");
+
+	std::ifstream ff;
+	ff.open("zubai.txt");
 	std::string str;
-	std::getline(f, str);
+	std::getline(ff, str);
 	for (char x : str) {
 		if ((x <= '9') && (x >= '0')) {
 			std::cout << x << std::endl;
 		}
 	}
+	ff.close();
 }
 
 void sortirovka() {
@@ -113,6 +113,6 @@ void sortirovka() {
 int main()
 {
 	setlocale(LC_ALL, "");
-	sortirovka();
+	copyfile();
 	return 0;
 }
