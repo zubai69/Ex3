@@ -2,9 +2,9 @@
 #include <cmath>
 #include <fstream>
 #include <string>
-#include <algorithm>
 #include <vector>
 #include <experimental/filesystem>
+#include <Windows.h>
 
 void zaem() {
 	double m, S, n, p;
@@ -73,6 +73,7 @@ void filt() {
 	f.close();
 
 	std::ifstream ff;
+
 	ff.open("zubai.txt");
 	std::string str;
 	std::getline(ff, str);
@@ -91,7 +92,7 @@ void sortirovka() {
 	std::cin >> str;
 	len = str.length();
 	std::vector <char> mass;
-	mass.reserve(str.length());
+	mass.reserve(len);
 	for (char s : str) {
 		mass.push_back(s);
 	}
@@ -112,7 +113,7 @@ void sortirovka() {
 
 int main()
 {
-	setlocale(LC_ALL, "");
-	copyfile();
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
 	return 0;
 }
