@@ -33,68 +33,87 @@ void ssuda()
 	std::cin >> m;
 	std::cout << "Введите количество лет:" << std::endl;
 	std::cin >> n;
-	double x = S / (12 * m);
-	double min = abs(n-x);
+	double mm = S / (12 * n);
+	double min = abs(m-mm);
 	double pp = 0;
 	p = 0;
-	while (p <= 100) {
-		double xx = 0;
+	bool T = true;
+	while (p <= 101) {
+		double mmm = 0;
 		double i = 1;
 		int ii = 0;
 		while (ii < n) {
 			i *= (1 + (p / 100));
 			ii += 1;
 		}
-		xx = (i - 1) / (i * (p / 100));
-		if (abs(xx - x) < min) {
-			min = abs(x - xx);
+		mmm = S * i * (p / 100) / (12 * (i - 1));
+		if (abs(mmm - m) < min) {
+			min = abs(mmm - m);
 			pp = p;
 		}
 		p += 0.001;
 	}
-	std::cout << "Процент равен: " << pp << std::endl;
+	if (pp <= 100) {
+		std::cout << "Процент равен: " << round(pp*1000)/1000 << std::endl;
+	}
+	else {
+		std::cout << "Процент не может быть найден" << std::endl;
+	}
+	
 }
 
 void copyfile() {
 	std::ofstream f1;
 	std::string filename = "zubai.txt";
+	std::string str = new char[10000];
 	f1.open(filename);
-	std::string full_path = std::experimental::filesystem::canonical(filename).generic_string();
-	std::cout << full_path << std::endl;
+	std::getline(std::cin, str);
+	f1 << str;
 	f1.close();
+	std::ifstream f2;
+	f2.open(filename);
+	std::string s;
+	std::getline(f2, s);
+	std::cout << s << std::endl;;
+	f2.close();
 }
 
 void filt() {
-	std::ofstream f;
+	std::ifstream f;
 	f.open("zubai.txt");
-	std::cout << "Введите строку: " << std::endl;
-	std::string strr;
-	f << strr;
-	f.close();
-
-	std::ifstream ff;
-
-	ff.open("zubai.txt");
 	std::string str;
-	std::getline(ff, str);
+	std::getline(f, str);
+	std::string i = "";
+	str += " ";
 	for (char x : str) {
 		if ((x <= '9') && (x >= '0')) {
-			std::cout << x << std::endl;
+			i += x;
+		}
+		else {
+			if (i != "") {
+				std::cout << std::stoi(i) << " ";
+			}
+			i = "";
 		}
 	}
-	ff.close();
+	f.close();
 }
 
 void sortirovka() {
 	std::string str;
-	int len;
 	std::cout << "Введите символы: ";
 	std::cin >> str;
-	len = str.length();
 	std::vector <char> mass;
-	mass.reserve(len);
+	mass.reserve(30);
+	int i = 0;
 	for (char s : str) {
-		mass.push_back(s);
+		if (i < 30) {
+			mass.push_back(s);
+			i += 1;
+		}
+		else {
+			break;
+		}
 	}
 	for (int i = 0; i < mass.size()-1; i++) {
 		for (int ii = 0; ii < mass.size()-1; ii++) {
